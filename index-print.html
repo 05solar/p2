@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>자동출석 — Alternative A · PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+  html, body {
+    margin: 0; padding: 0; background: #ffffff;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", sans-serif;
+    color: oklch(0.22 0.04 255);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  /* Cover page */
+  .cover {
+    width: 100%; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 80px;
+    break-after: page;
+  }
+  .cover .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; color: #A6165F; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .cover h1 {
+    font-size: 56px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    margin: 0 0 14px; color: #002d5c;
+  }
+  .cover .sub {
+    font-size: 18px; color: oklch(0.55 0.012 255); font-weight: 500;
+    max-width: 640px; line-height: 1.5; margin-bottom: 40px;
+  }
+  .cover .meta {
+    display: flex; gap: 40px; padding-top: 28px;
+    border-top: 1px solid oklch(0.92 0.004 255);
+  }
+  .cover .meta-item .k {
+    font-size: 11px; color: oklch(0.55 0.012 255); font-weight: 600;
+    letter-spacing: 0.05em; margin-bottom: 4px; text-transform: uppercase;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .cover .meta-item .v {
+    font-size: 15px; color: oklch(0.22 0.04 255); font-weight: 600;
+  }
+  .cover .logo {
+    width: 64px; height: 64px; border-radius: 18px;
+    background: #004386; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; font-weight: 700; letter-spacing: -0.04em;
+    margin-bottom: 36px;
+  }
+
+  /* Section divider page */
+  .divider {
+    width: 100%; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 80px;
+    break-before: page; break-after: page;
+  }
+  .divider .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; color: oklch(0.55 0.012 255); font-weight: 600;
+    letter-spacing: 0.08em; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .divider h2 {
+    font-size: 64px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+    margin: 0 0 16px; color: #002d5c;
+  }
+  .divider .sub {
+    font-size: 18px; color: oklch(0.55 0.012 255); font-weight: 500;
+    max-width: 700px; line-height: 1.5;
+  }
+  .divider .rule {
+    width: 80px; height: 4px; background: #A6165F; margin-bottom: 36px;
+  }
+
+  /* Screen page */
+  .page {
+    width: 100%; min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; padding: 30px 60px;
+    break-before: page;
+  }
+  .page:first-child { break-before: auto; }
+
+  .page .info { padding: 20px 0; }
+  .page .info .step {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    color: #A6165F; padding: 5px 10px; border: 1px solid #ecccdb;
+    border-radius: 4px; margin-bottom: 16px;
+  }
+  .page .info h3 {
+    font-size: 38px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;
+    margin: 0 0 12px; color: #002d5c;
+  }
+  .page .info .role {
+    font-size: 12px; font-weight: 600; color: oklch(0.55 0.012 255);
+    letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 8px;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .page .info .desc {
+    font-size: 15px; color: oklch(0.38 0.02 255); line-height: 1.55;
+    max-width: 380px; margin-bottom: 22px;
+  }
+  .page .info ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .page .info ul li {
+    font-size: 13.5px; color: oklch(0.22 0.04 255);
+    display: flex; gap: 10px; align-items: flex-start; line-height: 1.45;
+  }
+  .page .info ul li::before {
+    content: ''; width: 5px; height: 5px; border-radius: 2px;
+    background: #004386; margin-top: 8px; flex-shrink: 0;
+  }
+
+  .page .frame-wrap {
+    display: flex; align-items: center; justify-content: center;
+    height: 100%;
+  }
+  /* Phone frame is 402x874 — scale it down to fit landscape page */
+  .frame-scale {
+    transform: scale(0.65);
+    transform-origin: center center;
+    width: 402px; height: 874px;
+    flex-shrink: 0;
+  }
+  /* Compact bordered frame */
+  .phone {
+    width: 402px; height: 874px;
+    border-radius: 48px;
+    border: 1.5px solid oklch(0.92 0.004 255);
+    background: #fff;
+    box-shadow: 0 8px 36px rgba(0, 30, 70, 0.06);
+    overflow: hidden;
+    position: relative;
+  }
+  .phone-inner {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    background: #fff;
+  }
+
+  /* Domain page */
+  .domain-page {
+    width: 100%; min-height: 100vh;
+    padding: 50px 80px;
+    break-before: page;
+  }
+  .domain-page h3 {
+    font-size: 32px; font-weight: 700; letter-spacing: -0.025em;
+    color: #002d5c; margin: 0 0 6px;
+  }
+  .domain-page .domain-sub {
+    font-size: 14px; color: oklch(0.55 0.012 255); margin-bottom: 30px;
+  }
+  .domain-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .domain-card {
+    background: #fff; border: 1px solid oklch(0.92 0.004 255);
+    border-radius: 14px; padding: 22px;
+    break-inside: avoid;
+  }
+  .domain-card .idx {
+    display: inline-block; padding: 4px 9px; border-radius: 999px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .domain-card .idx.brand   { background: #eaf1f8; color: #002d5c; }
+  .domain-card .idx.ok      { background: #eaf1f8; color: #002d5c; }
+  .domain-card .idx.warn    { background: #f4f0e8; color: #4d4232; }
+  .domain-card .idx.danger  { background: #f8e8ef; color: #73104a; }
+  .domain-card .idx.mute    { background: oklch(0.975 0.003 255); color: oklch(0.38 0.02 255); }
+  .domain-card h4 {
+    font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
+    color: #002d5c; margin: 0 0 6px;
+  }
+  .domain-card p {
+    font-size: 13px; color: oklch(0.55 0.012 255); margin: 0; line-height: 1.5;
+  }
+
+  /* Hide design-canvas chrome inside frames */
+  #root, #root > * { margin: 0; padding: 0; }
+
+  @media print {
+    .page, .divider, .cover, .domain-page { break-before: page; }
+    .cover { break-before: auto; }
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="screens.jsx"></script>
+
+<script type="text/babel">
+const { useState: usePS } = React;
+
+const SCREENS = [
+  // section, step, title, role, desc, bullets, comp
+  { kind: 'divider', eyebrow: 'PART 01', title: '학생 사용자', sub: '로그인부터 자동출석 성공·실패까지의 5단계 흐름' },
+
+  { kind: 'screen', step: 'S1', role: '학생', title: '로그인 화면',
+    desc: '학교 포털 계정으로 로그인합니다. 자동 로그인을 켜면 다음 접속부터 곧바로 수업 화면으로 이동합니다.',
+    bullets: ['학교 포털 SSO 로그인', '자동 로그인 토글', '언어 선택 (한국어 / English)'],
+    el: () => <S1Login onLogin={() => {}}/> },
+
+  { kind: 'screen', step: 'S2', role: '학생', title: '수업 선택 화면',
+    desc: '오늘 수업을 카드 형태로 한눈에 확인하고, 현재 진행 중인 수업은 상단 라인과 진행 배지로 강조합니다.',
+    bullets: ['오늘 수업 카드 (코드 · 시간 · 강의실)', '출석 가능 상태 표시 (예정 / 가능 / 완료)', '진행 중 수업 강조 + 남은 시간'],
+    el: () => <S2Classes onPick={() => {}}/> },
+
+  { kind: 'screen', step: 'S3', role: '학생', title: '자동출석 진행 화면',
+    desc: '중앙의 큰 자동출석 버튼을 누르면 블루투스 비콘 + 위치 + 네트워크 상태를 검사해 자동 인증합니다. 보조 수단으로 QR과 인증번호를 제공합니다.',
+    bullets: ['중앙 자동출석 버튼 (메인 액션)', '블루투스 · 위치 · 네트워크 상태 인디케이터', 'QR 코드 / 인증번호 보조 버튼'],
+    el: () => <S3Attend forceState="idle"/> },
+
+  { kind: 'screen', step: 'S4', role: '학생', title: '출석 성공 화면',
+    desc: '인증이 완료되면 친근한 캐릭터 얼굴과 함께 처리 결과 영수증을 보여줍니다. 처리 시간 · 방식을 기록으로 남깁니다.',
+    bullets: ['미소 캐릭터로 성공 피드백', '출석 시간 / 처리 방식 영수증', '확인 버튼으로 수업 화면으로 복귀'],
+    el: () => <S4Success onDone={() => {}}/> },
+
+  { kind: 'screen', step: 'S5', role: '학생', title: '출석 실패 화면',
+    desc: '실패 원인을 항목별로 분리해 보여주고, 가장 빠른 복구 경로(설정 열기 · 재시도 · QR/인증번호)를 제시합니다.',
+    bullets: ['실패 원인 분리 표시 (BT/위치/네트워크)', '블루투스 · 위치 권한 확인 버튼', '재시도 / QR · 인증번호 대체 경로'],
+    el: () => <S5Fail onRetry={() => {}}/> },
+
+  { kind: 'divider', eyebrow: 'PART 02', title: '교수자 사용자', sub: '강의 선택부터 지각 처리·출결 마감까지의 4단계 흐름' },
+
+  { kind: 'screen', step: 'P1', role: '교수자', title: '강의 선택 화면',
+    desc: '오늘의 강의 리스트와 각 강의의 출석 요약을 한 카드 안에 묶어 보여줍니다. 진행 중 강의는 메인으로 강조합니다.',
+    bullets: ['오늘 강의 리스트', '진행 중 강의 강조 + 바로가기', '강의별 출석 / 지각 / 결석 요약'],
+    el: () => <P1Lectures onPick={() => {}}/> },
+
+  { kind: 'screen', step: 'P2', role: '교수자', title: '출석 진행 화면',
+    desc: '실시간 경과 시간과 출석률을 큰 카드로 보여주고, 출석하는 학생들의 활동을 라이브 피드로 흘려보냅니다.',
+    bullets: ['출석 시작 / 마감 버튼', '경과 시간 + 진행 바', '현재 출석 인원 / 출석률 + 라이브 피드'],
+    el: () => <P2Progress onOpen={() => {}}/> },
+
+  { kind: 'screen', step: 'P3', role: '교수자', title: '전체 출결 현황 화면',
+    desc: '도넛 차트로 비율을 직관화하고, 탭으로 전체 / 출석 / 지각 / 결석을 빠르게 필터링합니다. 학생별 처리 시간과 인증 수단을 함께 표시합니다.',
+    bullets: ['도넛 차트 + 비율 범례', '학생 리스트 (학번 / 처리 시간 / 인증 수단)', '일괄 수정 · CSV 내보내기'],
+    el: () => <P3Overview onLate={() => {}}/> },
+
+  { kind: 'screen', step: 'P4', role: '교수자', title: '지각 학생 확인 화면',
+    desc: '지각 기준(예: 10~30분)을 명시하고, 다중 선택으로 일괄 출결 수정 또는 출결 마감이 가능합니다.',
+    bullets: ['지각 학생 필터 + 기준 안내', '지각 시간 (+분:초) 표시', '출결 수정 · 출결 마감 일괄 처리'],
+    el: () => <P4Late onClose={() => {}}/> },
+];
+
+const DOMAINS = [
+  { idx: 'brand',  tag: '01', t: 'Attendance',         d: '출석 처리. 자동 / QR / 인증번호 등 인증 수단을 통합 관리합니다.' },
+  { idx: 'mute',   tag: '02', t: 'Lecture',            d: '강의 정보. 강의 코드 · 시간 · 강의실 · 분반을 보유합니다.' },
+  { idx: 'mute',   tag: '03', t: 'User',               d: '학생 / 교수자 사용자. 역할에 따라 노출되는 화면이 분리됩니다.' },
+  { idx: 'ok',     tag: '04', t: 'Attendance Status',  d: '출석 · 지각 · 결석 상태. 시간 기준에 따라 자동 전이됩니다.' },
+  { idx: 'warn',   tag: '05', t: 'Device Status',      d: '블루투스 · 위치 · 네트워크 상태. 자동출석 인증의 전제 조건.' },
+  { idx: 'danger', tag: '06', t: 'Error Handling',     d: '출석 실패 분류 + 복구 경로 제공 (설정 열기 / 재시도 / 대체 수단).' },
+  { idx: 'mute',   tag: '07', t: 'Notification',       d: '상태 피드백. 성공 · 실패 · 마감 알림을 사용자에게 전달합니다.' },
+];
+
+function PrintDoc() {
+  return (
+    <div>
+      {/* Cover */}
+      <section className="cover">
+        <div className="logo">출</div>
+        <div className="eyebrow">Alternative A · Auto-Attendance First</div>
+        <h1>자동출석 중심 구조<br/><span style={{ color: '#A6165F' }}>화면 흐름 명세서</span></h1>
+        <div className="sub">자동출석 기능을 메인 중심에 배치하여 빠르고 직관적인 출석 수행을 목표로 하는 모바일 출석 시스템의 화면 흐름과 컴포넌트 구성을 정리합니다.</div>
+        <div className="meta">
+          <div className="meta-item"><div className="k">Document</div><div className="v">Screen Flow Specification</div></div>
+          <div className="meta-item"><div className="k">Screens</div><div className="v">9 Screens · 2 Roles</div></div>
+          <div className="meta-item"><div className="k">Date</div><div className="v">2026. 05. 25</div></div>
+        </div>
+      </section>
+
+      {SCREENS.map((s, i) => {
+        if (s.kind === 'divider') {
+          return (
+            <section className="divider" key={i}>
+              <div className="rule"/>
+              <div className="eyebrow">{s.eyebrow}</div>
+              <h2>{s.title}</h2>
+              <div className="sub">{s.sub}</div>
+            </section>
+          );
+        }
+        return (
+          <section className="page" key={i}>
+            <div className="info">
+              <div className="role">{s.role}</div>
+              <div className="step">{s.step}</div>
+              <h3>{s.title}</h3>
+              <div className="desc">{s.desc}</div>
+              <ul>
+                {s.bullets.map((b, j) => <li key={j}>{b}</li>)}
+              </ul>
+            </div>
+            <div className="frame-wrap">
+              <div className="frame-scale">
+                <div className="phone">
+                  <div className="phone-inner">
+                    {s.el()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Domain page */}
+      <section className="domain-page">
+        <div style={{ marginBottom: 30 }}>
+          <div style={{
+            fontFamily: '"JetBrains Mono", monospace', fontSize: 12,
+            color: 'oklch(0.55 0.012 255)', fontWeight: 600,
+            letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12,
+          }}>PART 03 · Domain Model</div>
+          <h3>주요 도메인</h3>
+          <div className="domain-sub">화면을 가로지르는 핵심 객체와 책임</div>
+        </div>
+        <div className="domain-grid">
+          {DOMAINS.map((d, i) => (
+            <div className="domain-card" key={i}>
+              <div className={`idx ${d.idx}`}>{d.tag}</div>
+              <h4>{d.t}</h4>
+              <p>{d.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<PrintDoc/>);
+
+// Auto-print after fonts + JSX ready
+(async () => {
+  try { await document.fonts.ready; } catch (e) {}
+  await new Promise(r => setTimeout(r, 700));
+  window.print();
+})();
+</script>
+</body>
+</html>
