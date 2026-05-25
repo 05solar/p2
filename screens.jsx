@@ -296,11 +296,11 @@ function S1Login({ onLogin }) {
   const [keep, setKeep] = useState(true);
   const [id, setId] = useState('20211045');
   const [pw, setPw] = useState('••••••••');
-  const [lang, setLang] = useState('한국어');
+  const [lang, setLang] = useState('Ko');
   return (
     <Phone>
       <div style={{ padding: '20px 24px 0', display: 'flex', justifyContent: 'flex-end' }}>
-        <button onClick={() => setLang(lang === '한국어' ? 'English' : '한국어')} style={{
+        <button onClick={() => setLang(lang === 'Ko' ? 'English' : 'Ko')} style={{
           display: 'inline-flex', alignItems: 'center', gap: 6,
           background: T.surf, border: `1px solid ${T.line}`, borderRadius: 999,
           padding: '6px 12px', fontSize: 12, fontWeight: 600, color: T.ink2,
