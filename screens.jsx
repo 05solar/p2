@@ -1244,15 +1244,9 @@ const LATE = [
 ];
 
 function P4Late({ onClose, onBack }) {
-  const [selected, setSelected] = useState(new Set(['20211188']));
   const [onlySelected, setOnlySelected] = useState(false);
   const [strictRule, setStrictRule] = useState(false);
-  const toggle = (n) => {
-    const next = new Set(selected);
-    next.has(n) ? next.delete(n) : next.add(n);
-    setSelected(next);
-  };
-  const visibleLate = onlySelected ? LATE.filter(s => selected.has(s.num)) : LATE;
+  const visibleLate = onlySelected ? LATE.slice(0, 1) : LATE;
   return (
     <Phone>
       <Header sub="CSE3045 · 5월 18일" title="지각 학생" back onBack={onBack} right={
@@ -1308,10 +1302,10 @@ function P4Late({ onClose, onBack }) {
 
       <div style={{ flex: 1, overflow: 'auto', padding: '0 20px 12px' }}>
         <div style={{ fontSize: 11, color: T.mute, fontWeight: 600, letterSpacing: '.05em', padding: '4px 4px 8px' }}>
-          {selected.size > 0 ? `${selected.size}명 선택됨` : '학생을 선택해 일괄 처리'}
+          지각 학생 목록
         </div>
         {visibleLate.map(s => (
-          <LateRow key={s.num} s={s} sel={selected.has(s.num)} onToggle={() => toggle(s.num)}/>
+          <LateRow key={s.num} s={s}/>
         ))}
       </div>
 
@@ -1330,23 +1324,15 @@ function P4Late({ onClose, onBack }) {
   );
 }
 
-function LateRow({ s, sel, onToggle }) {
+function LateRow({ s }) {
   return (
-    <div onClick={onToggle} style={{
+    <div style={{
       display: 'flex', alignItems: 'center', gap: 12, padding: '12px 12px',
-      background: sel ? T.brandTint : T.surf,
-      border: `1px solid ${sel ? T.brand : T.line2}`,
-      borderRadius: 12, marginBottom: 8, cursor: 'pointer',
+      background: T.surf,
+      border: `1px solid ${T.line2}`,
+      borderRadius: 12, marginBottom: 8,
       transition: 'background .12s',
     }}>
-      <div style={{
-        width: 22, height: 22, borderRadius: 6,
-        border: `1.5px solid ${sel ? T.brand : T.line}`,
-        background: sel ? T.brand : T.surf,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-      }}>
-        {sel && Icon.check('#fff', 14)}
-      </div>
       <div style={{
         width: 36, height: 36, borderRadius: 999, background: T.warnSoft, color: T.warnDeep,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
