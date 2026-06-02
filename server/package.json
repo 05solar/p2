@@ -1,0 +1,23 @@
+{
+  "name": "attendance-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "자동출석 앱 백엔드 (Express)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed:reset": "node src/db/reset.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "attendance-app": "file:..",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

@@ -1,0 +1,126 @@
+.mypage { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.mypage-scroll { padding: 0 20px 28px; }
+
+/* 프로필 카드 */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(150deg, var(--brand), var(--brand-deep));
+  color: #fff;
+  position: relative;
+}
+.profile-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.profile-info { flex: 1; min-width: 0; }
+.profile-name-row { display: flex; align-items: center; gap: 8px; }
+.profile-name-row strong { font-size: 18px; font-weight: 700; }
+.profile-name-row .pill { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.profile-meta { font-size: 12.5px; opacity: 0.82; margin-top: 3px; }
+.profile-email { font-size: 12px; opacity: 0.66; margin-top: 1px; }
+.profile-edit {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 학생 통계 */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--surf);
+  border: 1px solid var(--line);
+  margin-top: 14px;
+}
+.stat-legend { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.legend-row { display: flex; align-items: center; gap: 8px; }
+.legend-swatch { width: 8px; height: 8px; border-radius: 2px; }
+.legend-label { flex: 1; font-size: 12.5px; color: var(--ink2); font-weight: 500; }
+.legend-value { font-size: 13px; color: var(--ink); font-weight: 700; }
+.stat-legend-foot {
+  font-size: 11.5px;
+  color: var(--mute);
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line2);
+}
+
+/* 교수자 통계 */
+.prof-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.prof-stat {
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surf);
+  border: 1px solid var(--line);
+}
+.prof-stat-label { font-size: 12px; color: var(--mute); font-weight: 600; }
+.prof-stat-value { display: flex; align-items: baseline; gap: 4px; margin-top: 6px; }
+.prof-stat-value strong { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; font-family: var(--mono); }
+.prof-stat-value small { font-size: 12px; color: var(--mute); }
+
+/* 출결 이력 */
+.history { margin-top: 18px; }
+.history-empty {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--mute);
+  background: var(--surf3);
+  border-radius: 12px;
+}
+.history-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--line2);
+}
+.history-date { font-size: 12px; color: var(--faint); width: 44px; flex-shrink: 0; }
+.history-info { flex: 1; min-width: 0; }
+.history-info strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.history-info span { font-size: 11.5px; color: var(--mute); }
+
+.logout-btn {
+  width: 100%;
+  margin-top: 24px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--danger);
+}
+.logout-btn:active { background: var(--danger-soft); }
+.mypage-foot { text-align: center; font-size: 11.5px; color: var(--faint); margin-top: 16px; }

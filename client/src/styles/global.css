@@ -1,0 +1,148 @@
+@import './theme.css';
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg-outer);
+  color: var(--ink);
+  font-family: var(--font);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* #root = 모바일 뷰포트. 데스크톱에서는 가운데 정렬된 디바이스처럼 보입니다. */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: var(--frame-w);
+  /* 모바일: 뷰포트 높이로 경계를 두어 내부 스크롤 영역이 동작하도록 함 */
+  height: 100vh;
+  height: 100dvh;
+  /* 모든 페이지 맨 위 공백 (상태바/노치 영역 확보) */
+  padding-top: 50px;
+  background: var(--bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  #root {
+    align-items: center;
+    padding: 24px 0;
+  }
+  .app-frame {
+    height: min(900px, calc(100vh - 48px));
+    border-radius: 28px;
+    box-shadow: var(--shadow-pop), 0 0 0 1px rgba(0, 67, 134, 0.1);
+  }
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+/* 스크롤 영역 (페이지 본문) */
+.page-scroll {
+  flex: 1;
+  min-height: 0; /* flex 자식이 내용보다 작아져 스크롤이 동작하도록 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 페이지 진입 페이드 */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.7;
+  }
+}
+@keyframes ripple {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  animation: fadeUp 0.32s ease both;
+}

@@ -1,0 +1,117 @@
+.overview-page { display: flex; flex-direction: column; }
+.overview-fixed { padding: 0 20px 8px; flex-shrink: 0; }
+
+.overview-summary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surf);
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+.overview-legend { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.ov-legend-row { display: flex; align-items: center; gap: 8px; }
+.ov-swatch { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.ov-legend-label { flex: 1; font-size: 12.5px; color: var(--ink2); font-weight: 500; }
+.ov-legend-value { font-size: 13px; color: var(--ink); font-weight: 700; }
+.ov-legend-pct { font-size: 11px; color: var(--faint); width: 36px; text-align: right; }
+
+.overview-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  background: var(--surf3);
+  border-radius: 12px;
+}
+.overview-tabs button {
+  flex: 1;
+  padding: 8px 4px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.overview-tabs button.is-active {
+  background: var(--surf);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.overview-tabs button span { font-size: 11px; opacity: 0.6; }
+
+.overview-list { padding: 4px 20px 12px; }
+.overview-empty { padding: 30px; text-align: center; font-size: 13px; color: var(--mute); }
+
+.roster-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 8px;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--line2);
+  border-radius: 0;
+}
+.roster-row-selected {
+  background: var(--brand-soft);
+  border: 1px solid var(--brand);
+  border-radius: 12px;
+}
+.roster-info { flex: 1; min-width: 0; }
+.roster-name-row { display: flex; align-items: center; gap: 6px; }
+.roster-name { font-size: 13.5px; color: var(--ink); font-weight: 600; }
+.roster-no { font-size: 11px; color: var(--faint); }
+.roster-meta { font-size: 11.5px; color: var(--mute); margin-top: 1px; }
+
+/* 학생 상태 편집기 */
+.overview-editor {
+  margin: 0 20px 8px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--surf);
+  border: 1px solid var(--brand-tint);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+  flex-shrink: 0;
+}
+.editor-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.editor-name { flex: 1; min-width: 0; }
+.editor-name strong { font-size: 13.5px; color: var(--ink); font-weight: 700; }
+.editor-name span { font-size: 11.5px; color: var(--mute); margin-left: 6px; }
+.editor-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.editor-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.editor-btn {
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surf3);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.editor-btn-active { color: #fff; }
+.editor-present { background: var(--ok); border-color: var(--ok); }
+.editor-late { background: var(--warn); border-color: var(--warn); }
+.editor-absent { background: var(--danger); border-color: var(--danger); }
+
+.overview-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px 18px;
+  border-top: 1px solid var(--line2);
+}
+.ov-flex { flex: 1; height: 48px; }

@@ -1,0 +1,36 @@
+name: Deploy to instance
+
+# main 에 push 되면 SSH 로 인스턴스에 접속해 자동 배포합니다.
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch: # 수동 실행 버튼
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH 배포 (git pull + build + pm2 restart)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}        # 113.198.66.75
+          port: ${{ secrets.SSH_PORT }}        # 19195
+          username: ${{ secrets.SSH_USER }}    # 예: ubuntu
+          key: ${{ secrets.SSH_KEY }}          # 개인키 전체 내용
+          script: |
+            set -e
+            # nvm 으로 설치한 node/pm2 를 비대화형 셸에서 인식시키기
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            cd ~/app
+            git pull origin main
+
+            # 의존성 설치 + 프론트 빌드
+            npm --prefix server install --omit=dev
+            npm --prefix client install
+            npm --prefix client run build
+
+            # 무중단 재시작 (없으면 최초 기동)
+            pm2 restart attendance --update-env || PORT=4000 pm2 start server/src/index.js --name attendance
+            pm2 save

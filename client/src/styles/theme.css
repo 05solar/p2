@@ -1,0 +1,51 @@
+/* 프로토타입 screens.jsx 의 디자인 토큰(T)을 CSS 변수로 이식 */
+:root {
+  /* 포인트 컬러 2종: 딥블루 / 딥베리 */
+  --brand: #004386;
+  --brand-deep: #002d5c;
+  --brand-hi: #3a6aa0;
+  --brand-soft: #eaf1f8;
+  --brand-tint: #cfdce8;
+
+  --accent: #a6165f;
+  --accent-deep: #73104a;
+  --accent-hi: #c4517f;
+  --accent-soft: #f8e8ef;
+  --accent-tint: #ecccdb;
+
+  /* 상태: ok=블루 / warn=웜그레이 / danger=베리 */
+  --ok: #004386;
+  --ok-soft: #eaf1f8;
+  --ok-deep: #002d5c;
+  --warn: #7a6a4a;
+  --warn-soft: #f4f0e8;
+  --warn-deep: #4d4232;
+  --danger: #a6165f;
+  --danger-soft: #f8e8ef;
+  --danger-deep: #73104a;
+
+  /* 잉크/뉴트럴 */
+  --ink: #1b2c3f;
+  --ink2: #45566a;
+  --mute: #6f7d8d;
+  --faint: #9aa8b5;
+  --line: #dce6ee;
+  --line2: #eef3f7;
+  --surf: #ffffff;
+  --surf3: #f6f9fb;
+  --bg: #ffffff;
+  --bg-outer: #e9eff4;
+
+  --font: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui,
+    'Apple SD Gothic Neo', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-card: 16px;
+  --radius-field: 12px;
+  --shadow-card: 0 1px 0 rgba(20, 20, 40, 0.02);
+  --shadow-pop: 0 18px 40px rgba(0, 31, 64, 0.16);
+
+  /* 모바일 프레임 폭 */
+  --frame-w: 440px;
+  --nav-h: 64px;
+}

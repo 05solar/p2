@@ -4,3 +4,8 @@ dist/
 *.log
 .chrome-profile*/
 .gh-pages-work/
+
+# 백엔드 런타임 데이터 / 환경설정
+server/data/
+server/.env
+.vite/
